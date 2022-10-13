@@ -1,15 +1,16 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Assignment is absurdly difficult for the second assignment of an "intro" 
+## programming course considering that it introduces a new concept that hasn't
+## been previously discussed (i.e. caching)
 
-## Write a short comment describing this function
+## Caches the inverse of a matrix
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  inverted_matrix <<- cacheSolve(x)
 }
 
 
-## Write a short comment describing this function
+## Returns the inverse of a matrix
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  return(solve(x))
 }
