@@ -1,16 +1,34 @@
-## Assignment is absurdly difficult for the second assignment of an "intro" 
-## programming course considering that it introduces a new concept that hasn't
-## been previously discussed (i.e. caching)
+## Functions to take the inverse of a square matrix and cache the result
 
-## Caches the inverse of a matrix
+## Creates a matrix whose inverse can be cached
 
 makeCacheMatrix <- function(x = matrix()) {
-  inverted_matrix <<- cacheSolve(x)
+    inverse_matrix <- NULL
+    set <- function(y) {
+      x <<- y
+      inverse_matrix <<- NULL
+    }
+    get <- function() x
+    set_inverse <- function(inverse) inverse_matrix <<- inverse
+    get_inverse <- function() inverse_matrix
+    list(set = set, 
+         get = get,
+         set_inverse = set_inverse,
+         get_inverse = get_inverse)
 }
 
 
-## Returns the inverse of a matrix
+## Returns the inverse of the matrix x. If the inverse matrix has been cached, 
+## function returns the cached data, otherwise calculates and returns the inverse
 
 cacheSolve <- function(x, ...) {
-  return(solve(x))
+    inverse_matrix <- x$get_inverse()
+    if(!is.null(inverse_matrix)) {
+        message("getting cached inverse")
+        return(inverse_matrix)
+    }
+    data <- x$get()
+    inverse_matrix <- solve(data, ...)
+    x$set_inverse(inverse_matrix)
+    inverse_matrix
 }
